@@ -22,5 +22,5 @@ int main()
  tm local = *localtime(&t);
  cin >> get_time(&local, "%H:%M");
  cout << local.tm_hour << " and " << local.tm_min;
- cout << "ale";
+ cout << "a";
 }
