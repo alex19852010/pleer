@@ -18,12 +18,12 @@ class Track
 
 class Audiopleer
 {  
-   public:   
+   private:   
    vector <Track> tracks;
    bool isplaying = 0;
-   Track* currenttrack;
-    
    
+    
+   public:
    void addtrack (string* name, tm* creationdate, int* duration)
    {
      Track track;
@@ -53,6 +53,44 @@ class Audiopleer
      }
 
        cout << "track not found" << endl;
+   }
+
+   void pause()
+   {
+     if(!isplaying)
+     {
+      cout << "no track is currently plating" << endl;
+      return;
+     }
+
+      cout << "track paused" << endl;
+      isplaying = false;
+   }
+
+   void next()
+   {
+     if(tracks.empty())
+     {
+      cout << "no track avaliable" << endl;
+      return;
+     }
+
+     int randomindex =rand() % tracks.size();
+     isplaying = true;
+     cout << "name: " << tracks[randomindex].name << " created date " << tracks[randomindex].creationdate.tm_hour << ":" <<
+      tracks[randomindex].creationdate.tm_min << " duration " << tracks[randomindex].duration << endl;
+   }
+
+   void stop()
+   {
+     if(!isplaying)
+     {
+      cout << "no track is currently playing" << endl;
+      return;
+     }
+
+     cout << "track stoped" << endl;
+     isplaying = false;
    }
 
    
@@ -92,7 +130,7 @@ int main()
  while(1)
  {
     string command;
-    cout << "enter command: play, next, pause, stop, exit";
+    cout << "enter command: play, next, pause, stop, exit: ";
     cin >> command;
 
     if(command == "play")
@@ -101,6 +139,32 @@ int main()
       cout << "enter name track:";
       cin >> name;
       pleer.play(&name);
+    }
+
+    else if(command == "pause")
+    {
+      pleer.pause();
+    }
+
+    else if(command == "next")
+    {
+      pleer.next();
+    }
+
+    else if(command == "stop")
+    {
+      pleer.stop();
+    }
+
+    else if(command == "exit")
+    {
+      cout << "exit from programm" << endl;
+      break;
+    }
+
+    else
+    {
+      cout << "invalid command" << endl;
     }
  }
 
